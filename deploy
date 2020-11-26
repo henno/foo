@@ -64,6 +64,7 @@ cmd 'git pull'
 
 # Delete old data from db
 cmd "mongo $PM2_APP_NAME --eval 'db.dropDatabase()'"
+cmd "echo 'db.dropDatabase()' | mongo $PM2_APP_NAME"
 
 # Restore dump
 cmd "tar -zxvf dump.tgz"
