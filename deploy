@@ -4,6 +4,14 @@
 # Write some HTTP headers to make Nginx happy
 echo -e "Content-type: text/html\n"
 
+# Read env ($link https://stackoverflow.com/a/63902716/584750)
+# shellcheck source=.env
+source <(cat .env \
+  | sed -E '/^\s*#.*/d' \
+  | tr '\n' '\000' \
+  | sed -z -E 's/^([^=]+)=(.*)/\1\x0\2/g' \
+  | xargs -0 -n2 bash -c 'printf "export %s=%q;\n" "${@}"' /dev/null)
+
 # Variables
 DIRECTORY="$PWD/public"
 VCS_URL=git@github.com:henno/foo.git
@@ -19,10 +27,10 @@ log() {
 }
 
 cmd() {
-	log "Doing '$@'"
+	log "Doing '$1'"
 
 	# Run the command and capture its output and exit code
-	COMMAND_OUTPUT=`$@ 2>&1`
+	COMMAND_OUTPUT=`$1 2>&1`
 	COMMAND_EXIT_CODE=$?
 
 	# Add command output to OUTPUT
