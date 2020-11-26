@@ -63,7 +63,7 @@ cmd "git reset --hard"
 cmd 'git pull'
 
 # Delete old data from db
-mongo localhost/foo <<< "db.dropDb()"
+cmd "mongo foo --eval printjson(db.dropDatabase())"
 
 # Restore dump
 cmd "tar -zxvf dump.tgz"
