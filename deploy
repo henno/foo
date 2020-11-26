@@ -64,7 +64,7 @@ cmd 'git pull'
 
 # Delete old data from db
 EVAL="db.dropDb()"
-cmd "echo $EVAL | mongo localhost/foo"
+cmd "echo $EVAL \| mongo localhost/foo"
 
 # Restore dump
 cmd "tar -zxvf dump.tgz"
