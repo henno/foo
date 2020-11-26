@@ -43,11 +43,7 @@ cmd() {
 	fi
 }
 
-log "Deploying $VCS_URL to $DIRECTORY"$'\n''--------------------------------------------------------------------------'
-
-# Update project
-
-log "Updating the project"
+log "Deploying $VCS_URL to $DIRECTORY"$'\n'
 
 log "Shutting down running app"
 cmd "pm2 stop $PM2_APP_NAME"
@@ -57,6 +53,13 @@ cmd "git reset --hard"
 
 # Pull the new commits from Github
 cmd 'git pull'
+
+# Delete old data from db
+cmd "mongo $PM2_APP_NAME --eval 'printjson(db.dropDatabase())'"
+
+# Restore dump
+cmd "tar -zxvf dump.tgz"
+cmd "mongorestore dump"
 
 # Run tests
 cmd 'npm run test'
