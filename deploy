@@ -63,7 +63,9 @@ cmd "git reset --hard"
 cmd 'git pull'
 
 # Delete old data from db
-cmd "echo 'mongo $PM2_APP_NAME <<< 'db.dropDatabase()'"
+cmd "mongo localhost/$PM2_APP_NAME <<EOF
+db.dropDatabase()
+EOF"
 
 # Restore dump
 cmd "tar -zxvf dump.tgz"
