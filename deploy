@@ -62,4 +62,4 @@ cmd 'git pull'
 cmd 'npm run test'
 
 # Re-run the app
-cmd "pm2 start $PM_APP_NAME"
+cmd "pm2 start $PM2_APP_NAME"
