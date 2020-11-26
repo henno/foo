@@ -67,7 +67,7 @@ cmd "mongo $PM2_APP_NAME --eval 'printjson(db.dropDatabase())'"
 
 # Restore dump
 cmd "tar -zxvf dump.tgz"
-cmd "mongorestore dump"
+cmd "mongorestore -d $PM2_APP_NAME dump"
 
 # Run tests
 cmd 'npm run test'
