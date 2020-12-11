@@ -19,7 +19,11 @@
   "homepage": "https://github.com/henno/foo#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
+    "exec": "^0.2.1",
     "express": "^4.17.1",
-    "nodemon": "^2.0.6"
+    "mongodb": "^3.6.3",
+    "mongodb-uri": "^0.9.7",
+    "nodemon": "^2.0.6",
+    "shelljs": "^0.8.4"
   }
 }
